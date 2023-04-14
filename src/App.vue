@@ -5,8 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import Navbar from './components/Navbar.vue';
-import ShoppingCard from './components/ShoppingCard.vue'
+import Navbar from './components/navbar/Navbar.vue';
+import ShoppingCard from './components/navbar/ShoppingCard.vue'
 
 </script>
 
