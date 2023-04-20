@@ -11,14 +11,11 @@
              Your browser does not support HTML5 video.
         </video>
     </div>
-
     <Iphones />
 </template>
 
 <script setup lang="ts">
 import Iphones from '@/components/shop/Iphones.vue';
-
-
 
 </script>
 

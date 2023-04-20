@@ -1,15 +1,15 @@
 <template>
     <div>
-        <p class="font-thin text-xl mt-5 justify-start">Adres e-mail: <span class="font-bold">e.lewan23@gmail.com</span></p>
+        <p class="font-thin text-xl mt-5 justify-start">Adres e-mail: <span class="font-bold">{{ store.mail }}</span></p>
         <form class="flex flex-col mt-2">
             <div class="flex">
                 <div class="m-2">
                     <label class="ml-1" for="">Imię:</label>
-                    <input class="h-14 text-xl bg-neutral-100 p-5 rounded-lg font-thin border focus:border-blue-500 focus:outline-none w-full" type="text" placeholder="Dawid" value="Dawid" />
+                    <input class="h-14 text-xl bg-neutral-100 p-5 rounded-lg font-thin border focus:border-blue-500 focus:outline-none w-full" type="text" :placeholder="store.name" :value="store.name" />
                 </div>
                 <div class="m-2">
                     <label class="ml-1" for="">Nazwisko:</label>
-                    <input class="h-14 text-xl bg-neutral-100 p-5 rounded-lg font-thin border focus:border-blue-500 focus:outline-none w-full" type="text" placeholder="Polak" value="Polak"/>
+                    <input class="h-14 text-xl bg-neutral-100 p-5 rounded-lg font-thin border focus:border-blue-500 focus:outline-none w-full" type="text" :placeholder="store.lastName" :value="store.lastName"/>
                 </div>
             </div>
             <button class="bg-black rounded-full text-white px-8 py-3 font-thin drop-shadow-md border focus:border-blue-500 focus:outline-none mb-10 hover:shodow-xl w-1/2 mt-5">Zmień</button>
@@ -42,9 +42,11 @@
 </template>
 
 <script setup lang="ts">
+import { useDataUserStore } from '@/stores/dataUser';
+const store = useDataUserStore();
 
 </script>
 
 <style scoped>
 
-</style>bas
+</style>
