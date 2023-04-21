@@ -4,11 +4,11 @@
                <div class="grow ml-5 sm:ml-16 flex items-center">
                     <img @click="activeAccountMenu = !activeAccountMenu" class="w-10 h-10 mr-2 cursor-pointer p-2 rounded-full" :class="{ 'bg-zinc-200': activeAccountMenu }" src="../../assets/icons/person.svg" alt="person" />
                     <div>
-                         <router-link v-if="!store.logged" :to="{ name: 'login' }">
+                         <router-link v-if="!storeDataUer.logged" :to="{ name: 'login' }">
                               <p class="text-xs mt-1 font-extralight cursor-pointer hover:underline border-gray-950 hidden sm:block">ZALOGUJ SIĘ</p>
                          </router-link>
-                         <router-link v-if="store.logged" :to="{ name: 'myaccount' }">
-                              <p class="text-md mt-1 font-blod cursor-pointer hover:underline border-gray-950 hidden sm:block">{{ store.name }}</p>
+                         <router-link v-if="storeDataUer.logged" :to="{ name: 'myaccount' }">
+                              <p class="text-md mt-1 font-blod cursor-pointer hover:underline border-gray-950 hidden sm:block">{{ storeDataUer.name }}</p>
                          </router-link>
                     </div>
                </div>
@@ -22,12 +22,13 @@
                          <img @click="activeSearching = !activeSearching" class="w-10 h-10 sm:mr-2 cursor-pointer hover:bg-zinc-200 p-2 rounded-full" src="../../assets/icons/search.svg" alt="search" />
                          <div class="flex">
                               <img @click="activeShoppingCard = !activeShoppingCard" class="w-10 h-10 cursor-pointer hover:bg-zinc-200 p-2 rounded-full" src="../../assets/icons/shopping_cart.svg" alt="shopping_cart" />
-                              <span class="bg-black w-4 h-4 text-white rounded-full text-[10px] flex justify-center items-center ml-[-15px] mt-[3px]">5</span>
+                              <span v-if="storeShoppingCard.calculateValueOfProducts" class="bg-black w-4 h-4 text-white rounded-full text-[10px] flex justify-center items-center ml-[-15px] mt-[3px]">{{ storeShoppingCard.numberProducts }}</span>
                          </div>
                     </div>
                </div>
           </div>
           <ProgressBar v-if="progressBar.showProgressBar.value" />
+          <AlertProductAddedToShoppingCard v-if="storeShoppingCard.doing" />
      </div>
      <AccountMenu v-if="activeAccountMenu" @click="activeAccountMenu = !activeAccountMenu" />
      <ShoppingCard v-if="activeShoppingCard" @close="activeShoppingCard = !activeShoppingCard" />
@@ -42,22 +43,16 @@ import ShoppingCard from "./ShoppingCard.vue";
 import Searching from "./Searching.vue";
 import AccountMenu from "./AccountMenu.vue";
 import ProgressBar from "./ProgressBar.vue";
-import { useDataUserStore } from '@/stores/dataUser';
+import AlertProductAddedToShoppingCard from "./AlertProductAddedToShoppingCard.vue";
+import { useDataUserStore } from "@/stores/dataUser";
+import { useShoppingCard } from "@/stores/shoppingCard";
 
 const activeShoppingCard = ref(false);
 const activeSearching = ref(false);
 const activeAccountMenu = ref(false);
-// const { logged } = currentlySignedInUser();
 
-
-
-
-const store = useDataUserStore();
-
-
-
-
-
+const storeDataUer = useDataUserStore();
+const storeShoppingCard = useShoppingCard();
 </script>
 
 <style scoped lang="scss"></style>

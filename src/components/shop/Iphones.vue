@@ -1,6 +1,6 @@
 <template>
      <div class="w-full max-w-3xl m-auto mb-[1000px]">
-          <h1 class="text-4xl text-center font-bold">Który iPhone jest stworzony dla Ciebie?</h1>
+          <h1 class="text-4xl text-center font-bold my-10">Który iPhone jest stworzony dla Ciebie?</h1>
           <div class="flex flex-nowrap w-full overflow-auto h-[120%]">
                <CardProduct v-for="iphone in iphones" :key="iphone" :data="iphone"/>
                <div v-if="errorMessage.active" class="text-center w-full my-20 mx-5 font-thin">
