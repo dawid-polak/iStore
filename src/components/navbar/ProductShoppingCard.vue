@@ -21,6 +21,7 @@ const props = defineProps(['data'])
 const storeShoppinCard = useShoppingCard();
 
 
+
 </script>
 
 <style scoped></style>

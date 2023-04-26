@@ -16,6 +16,8 @@ export const useShoppingCard = defineStore("shoppingCard", {
           totalPrice: 0,
           //true when the items is adding | false if the prosess will be end
           doing: false,
+          //show alert user isn't logged 
+          showAlertLogged: false
      }),
      getters: {
           //function how many items exist in shopping card
@@ -40,6 +42,49 @@ export const useShoppingCard = defineStore("shoppingCard", {
                setTimeout(() => {
                     this.$state.doing = false;
                }, 2000);
+          },
+
+          // add product to shopping card
+          addProductToShoppingCard(product: CardProduct, userLogged: Boolean) {
+               if (userLogged) {
+                    let productExist;
+
+                    // check the product exist in array
+                    if (this.$state.cardProducts.length === 0) {
+                         this.$state.cardProducts.push({
+                              id: product.id,
+                              numberOfProduct: 1,
+                              name: product.name,
+                              price: product.price,
+                              img: product.imgMain,
+                         });
+                         productExist = true;
+                         this.showAlert();
+                    } else {
+                         this.$state.cardProducts.map((item) => {
+                              if (item.name === product.name) {
+                                   productExist = true;
+                                   item.numberOfProduct++;
+                                   this.showAlert();
+                              } else {
+                                   productExist = false;
+                              }
+                         });
+                    }
+
+                    if (!productExist) {
+                         this.$state.cardProducts.push({
+                              id: product.id,
+                              numberOfProduct: 1,
+                              name: product.name,
+                              price: product.price,
+                              img: product.imgMain,
+                         });
+                         this.showAlert();
+                    }
+               } else {
+                    this.$state.showAlertLogged = true;
+               }
           },
           //remove product from shopping card
           removeProductFromShoppingCard(idProduct: String) {

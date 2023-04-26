@@ -37,6 +37,6 @@ export const useDataUserStore = defineStore("dataUser", {
                } catch (err) {
                     console.log(err);
                }
-          },
+          }, 
      },
 });

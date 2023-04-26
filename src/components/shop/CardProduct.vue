@@ -7,7 +7,7 @@
                <div class="flex items-center justify-around my-4">
                     <p>Juz od {{ data.price }} zł</p>
                     <div class="flex items-center">
-                         <img @click="addToShoppingCard(data.id), store.showAlert()" class="w-10 h-10 mr-2 p-2 hover:bg-zinc-200 rounded-full cursor-pointer" src="../../assets/icons/add_shopping_card.svg" alt="addShoppingCard" />
+                         <img @click="store.addProductToShoppingCard(data, storeDataUser.logged)" class="w-10 h-10 mr-2 p-2 hover:bg-zinc-200 rounded-full cursor-pointer" src="../../assets/icons/add_shopping_card.svg" alt="addShoppingCard" />
                          <button class="bg-blue-600 px-3 py-1 text-sm text-white rounded-full hover:drop-shadow-xl text-center">KUP</button>
                     </div>
                </div>
@@ -17,31 +17,11 @@
 
 <script setup lang="ts">
 import { useShoppingCard } from "@/stores/shoppingCard";
+import { useDataUserStore } from "@/stores/dataUser";
 const props = defineProps(["data"]);
 const store = useShoppingCard();
+const storeDataUser = useDataUserStore();
 
-//add product to shopping card
-function addToShoppingCard(productId: string) {
-     //check the product exist in the idProducts
-     if (store.idProducts.includes(productId)) {
-          //if product exist add one to numberOfProduct
-          store.cardProducts.map((product) => {
-               product.numberOfProduct++ as Number;
-          });
-     } else {
-          //add id product to idProducts
-          store.idProducts.push(productId);
-
-          //add product to cardProducts
-          store.cardProducts.push({
-               id: productId,
-               numberOfProduct: 1,
-               name: props.data.name,
-               price: props.data.price,
-               img: props.data.imgMain
-          });
-     }
-};
 </script>
 
 <style scoped></style>
